@@ -9,9 +9,11 @@ public class MapVisualizer : MonoBehaviour
     private Transform parent;
     public Color startColor, exitColor;
 
+    private Dictionary<Vector3, GameObject> dictionaryOfObstacles;
     private void Awake()
     {
         parent = this.transform;
+        dictionaryOfObstacles = new Dictionary<Vector3, GameObject>();
     }
 
     public void VisualizeMap(MapGrid grid, MapData mapData, bool visualizeUsingPrefabs)
@@ -43,6 +45,11 @@ public class MapVisualizer : MonoBehaviour
                 {
                     continue;
                 }
+
+                if (!dictionaryOfObstacles.ContainsKey(positionOnGrid))
+                {
+                    CreateIndicator(positionOnGrid,Color.white,PrimitiveType.Cube);
+                }
             }
         }
     }
@@ -73,6 +80,15 @@ public class MapVisualizer : MonoBehaviour
         Renderer renderer = element.transform.GetComponent<Renderer>();
         Debug.Log("adadad");
         renderer.material.SetColor("_Color",startColor);
+        dictionaryOfObstacles.Add(position,element);
     }
 
+    public void ClearMap()
+    {
+        foreach (var obstacle in dictionaryOfObstacles.Values)
+        {
+            Destroy(obstacle);
+        }
+        dictionaryOfObstacles.Clear();
+    }
 }

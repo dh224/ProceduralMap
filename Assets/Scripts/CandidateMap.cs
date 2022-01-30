@@ -22,6 +22,8 @@ public class CandidateMap
         obstacleArray = new bool[mapGrid.Width * mapGrid.Height];
         knightPiecesList = new List<KnightPiece>();
         RandomlyPlaceKnightPieces(this.numberOfPieces);
+
+        PlaceObstacles();
     }
     private bool CheckIfPositionCanBeObstacle(Vector3 position)
     {
@@ -59,6 +61,25 @@ public class CandidateMap
         }
     }
 
+    private void PlaceObstaclesForThisKnight(KnightPiece knightPiece)
+    {
+        foreach (var move in KnightPiece.listOfPossibleMoves)
+        {
+            var newPosition = knightPiece.Position + move;
+            if (mapGrid.IsCellValid(newPosition.x,newPosition.z) && CheckIfPositionCanBeObstacle(newPosition))
+            {
+                obstacleArray[mapGrid.CalculateIndexFromCoorinates(newPosition.x, newPosition.z)] = true;
+            }
+        }
+    }
+
+    private void PlaceObstacles()
+    {
+        foreach (var knightPiece in knightPiecesList)
+        {
+            PlaceObstaclesForThisKnight(knightPiece);
+        }
+    }
     public MapData GetMapData()
     {
         return new MapData

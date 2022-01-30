@@ -217,7 +217,7 @@ MonoBehaviour:
   exitEdge: 2
   randomPlacement: 1
   numberOfPieces: 10
-  MapVisualizer: {fileID: 1652173339}
+  mapVisualizer: {fileID: 1652173339}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,8 +387,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.651256, y: -0.009862712, z: 0.008475204, w: 0.7587467}
-  m_LocalPosition: {x: 5.97, y: 10.92, z: 2.93}
+  m_LocalRotation: {x: -0.5017584, y: 0.49820876, z: -0.5006493, w: -0.49937648}
+  m_LocalPosition: {x: 9.660767, y: 19.36657, z: 10.974189}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

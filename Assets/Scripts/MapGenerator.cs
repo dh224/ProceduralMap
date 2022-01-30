@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MapGenerator : MonoBehaviour
 {
@@ -11,21 +12,26 @@ public class MapGenerator : MonoBehaviour
     public Direction startEdge, exitEdge;
     public bool randomPlacement;
     private Vector3 startPosition, exitPosition;
-    [Range(1,10)]
+    [Range(1,30)]
     public int numberOfPieces;
 
-    public MapVisualizer MapVisualizer;
+    [FormerlySerializedAs("MapVisualizer")] public MapVisualizer mapVisualizer;
     void Start()
     {
-        mapGrid = new MapGrid(width, height);
+        GenerateNewMap();
         gridVisualizer.VisualizeGrid(width,height);
+    }
+
+    public void GenerateNewMap()
+    {
+        mapVisualizer.ClearMap();
+        mapGrid = new MapGrid(width, height); 
         MapHelper.RandomlyChooseAndSetStartAndExit(mapGrid,ref startPosition,ref exitPosition, randomPlacement, startEdge,
             exitEdge);
         CandidateMap map = new CandidateMap(mapGrid, numberOfPieces);
         map.CreateMap(startPosition, exitPosition);
-        MapVisualizer.VisualizeMap(mapGrid,map.GetMapData(),false);
+        mapVisualizer.VisualizeMap(mapGrid,map.GetMapData(),false);
     }
-
     // Update is called once per frame
     void Update()
     {
