@@ -92,6 +92,13 @@ public class MapGrid
     {
         return z * width + x;
     }
+
+    public Vector3 CalculateCoordinatesFromIndex(int randomIndex)
+    {
+        int x = randomIndex % width;
+        int z = randomIndex / width;
+        return new Vector3(x, 0, z);
+    }
     
     public int CalculateIndexFromCoorinates(float x, float z)
     {
