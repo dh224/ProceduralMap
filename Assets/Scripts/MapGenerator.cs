@@ -14,14 +14,12 @@ public class MapGenerator : MonoBehaviour
     private Vector3 startPosition, exitPosition;
     [Range(1,30)]
     public int numberOfPieces;
-
     [FormerlySerializedAs("MapVisualizer")] public MapVisualizer mapVisualizer;
     void Start()
     {
         GenerateNewMap();
         gridVisualizer.VisualizeGrid(width,height);
     }
-
     public void GenerateNewMap()
     {
         mapVisualizer.ClearMap();
